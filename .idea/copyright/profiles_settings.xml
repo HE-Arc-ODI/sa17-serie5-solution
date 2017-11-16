@@ -1,0 +1,7 @@
+<component name="CopyrightManager">
+  <settings default="CopyrightODI">
+    <module2copyright>
+      <element module="All" copyright="CopyrightODI" />
+    </module2copyright>
+  </settings>
+</component>

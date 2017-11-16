@@ -1,3 +1,11 @@
+/*
+ * Company : HEG-ARC
+ * Lesson: ODI SA17
+ * Autor: Myriam Schaffter
+ * Date: 16.11.17 10:21
+ * Module: jaxperiments
+ */
+
 package ch.hearc.odi.services;
 
 import ch.hearc.odi.business.ShoppingList;
@@ -14,6 +22,9 @@ public class ShoppingListService implements Serializable {
 
     private HashMap<Long, ShoppingList> mapShoppingList;
 
+    /**
+     * init the bean ShoppingListService
+     */
     @PostConstruct
     public void init() {
 
@@ -42,10 +53,21 @@ public class ShoppingListService implements Serializable {
     }
 
 
+    /**
+     * method get a shopping list
+     * @param id of shopping list
+     * @return Shopping list from the Map
+     */
     public ShoppingList getShoppingList(Long id) {
         return mapShoppingList.get(id);
     }
 
+    /**
+     * method create a shopping list
+     * @param id of shopping list
+     * @param name of shopping list
+     * @return <tt>true</tt> if the shopping list is created. <tt>false</tt> if the shopping list isn't created. The shopping list can't be create if the id is null
+     */
     public boolean createShoppingList(Long id, String name) {
         if (id != null){
             this.mapShoppingList.put(id, new ShoppingList(id, name));
@@ -54,6 +76,12 @@ public class ShoppingListService implements Serializable {
             return false;
     }
 
+    /**
+     * method update a shopping list
+     * @param id of shopping list
+     * @param name of shopping list
+     * @return <tt>true</tt> if the shopping list is updated. <tt>false</tt> if the shopping list isn't update. the shopping list can't be update if the id is null.
+     */
     public boolean updateShoppingList(Long id, String name){
         if (id != null) {
             ShoppingList s = this.mapShoppingList.get(id);
@@ -66,6 +94,11 @@ public class ShoppingListService implements Serializable {
         return false;
     }
 
+    /**
+     * method delete a shopping list
+     * @param id of shopping list
+     * @return <tt>true</tt> if the shopping list is deleted. <tt>false</tt> if the shopping list isn't deleted. the shopping list can't be delete if the id is null.
+     */
     public boolean deleteShoppingList(Long id){
         ShoppingList s = this.mapShoppingList.remove(id);
         if(s==null) {
@@ -74,6 +107,14 @@ public class ShoppingListService implements Serializable {
             return true;
     }
 
+    /**
+     * method add item to a specific shopping list
+     * @param idShoppingList of shopping list
+     * @param idItem of item
+     * @param nameItem of item
+     * @param quantityItem of item
+     * @return <tt>true</tt> if the item is added to a specific shopping list. <tt>false</tt> if the item isn't added to a specific shopping list. The item can't be add to a specific shopping list if this id is null or/and if the id of shopping list is null.
+     */
     public boolean addItemShoppingList(Long idShoppingList, Long idItem, String nameItem, int quantityItem){
 
         if (existShoppingList(idShoppingList)==true){
@@ -83,6 +124,12 @@ public class ShoppingListService implements Serializable {
         return false;
     }
 
+    /**
+     * method deleted item of a specific shopping list
+     * @param idShoppingList of shopping list
+     * @param idItem of item
+     * @return <tt>true</tt> if the item is deleted from a specific shopping list. <tt>false</tt> if the item isn't deleted from a specific shopping list. The item can't be delete from a specific shopping list if this id is null or/and if the id of shopping list is null.
+     */
     public boolean deleteItemShoppingList(Long idShoppingList, Long idItem){
         int i = -1;
         if (existShoppingList(idShoppingList)==true){
@@ -97,6 +144,13 @@ public class ShoppingListService implements Serializable {
         return false;
     }
 
+    /**
+     * change quantity of item
+     * @param idShoppingList of shopping list
+     * @param idItem of item
+     * @param quantityItem of item
+     * @return <tt>true</tt> if the quantity of item is changed. <tt>false</tt> if the quantity of item isn't changed. The quantity of item can't be change if the id of item is null or/and if the id of shopping list is null.
+     */
     public boolean updateQuantityItemShoppingList(Long idShoppingList, Long idItem, int quantityItem){
         if (existShoppingList(idShoppingList)==true){
             if(this.mapShoppingList.get(idShoppingList).getItem(idItem)!=null){
@@ -107,6 +161,11 @@ public class ShoppingListService implements Serializable {
         return false;
     }
 
+    /**
+     * method test if shopping list exist in the Map
+     * @param id of shopping list
+     * @return <tt>true</tt> if the shopping list is in the Map. <tt>false</tt> if the shopping list isn't in the Map
+     */
     private boolean existShoppingList(Long id){
 
         if(this.mapShoppingList.get(id)!=null){
