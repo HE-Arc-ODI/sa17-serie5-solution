@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Built-By: myriam.schaffte
+Created-By: IntelliJ IDEA
+Build-Jdk: 1.8.0_92
+
